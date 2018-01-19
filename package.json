@@ -1,0 +1,49 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Typescript inferno prove",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --inline --config webpack.dev.js"
+  },
+  "author": "Leonardo Saracini",
+  "license": "MIT",
+  "engines": {
+    "node": "7.7.4"
+  },
+  "dependencies": {
+    "@types/ramda": "^0.25.0",
+    "classnames": "^2.2.5",
+    "hyperscript": "^2.0.2",
+    "hyperscript-helpers": "^3.0.3",
+    "inferno": "^3.10.1",
+    "inferno-component": "^3.10.1",
+    "inferno-create-element": "^3.10.1",
+    "inferno-hyperscript": "^3.10.1",
+    "inferno-redux": "^3.10.1",
+    "ramda": "^0.25.0",
+    "redux": "^3.7.2"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.3",
+    "awesome-typescript-loader": "^3.4.0",
+    "clean-webpack-plugin": "^0.1.17",
+    "css-loader": "^0.28.7",
+    "ejs-loader": "^0.3.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.5",
+    "html-webpack-plugin": "^2.30.1",
+    "source-map-loader": "^0.2.3",
+    "style-loader": "^0.19.0",
+    "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.9.0",
+    "webpack-dev-middleware": "^2.0.4",
+    "webpack-dev-server": "2.9.4",
+    "webpack-merge": "^4.1.1",
+    "xml-loader": "^1.2.1"
+  }
+}
