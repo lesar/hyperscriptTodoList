@@ -1,4 +1,4 @@
-#hyperscriptTodoList
+# hyperscriptTodoList
 
 This is an todo list example. I have choose to write this example because there are plenty todolist example so people are familiar with its logic.
 What's new in this example is the tool combination used to develop it.
@@ -17,26 +17,26 @@ I have found few example using this tools combination:
 
 ## Why this tool set
 
-###TypeScript
+### TypeScript
 Is usefull in many way: you can use **class**, **interface**, **enum**, ... and at last using it's interface you can make usefull control on parameter typechecking, presence etc. avoiding the need to use [PropTypes][7].
-###Infernojs
+### Infernojs
 Is capable to providing the greatest [React][8] functionality but in minor size.
 Inferno bring lifecycle events on functional Component too.
-###Redux
+### Redux
 On Inferno and on all React like framework it's tedious incapsulate state in upper component and share it down from the root component to leaves compoment that need it. It's complex too. So are born framework like [Flux][11] but the multiple state existance and multple store component make it too complex to my experience. See [Flux concepts][10] and [Flux overview][9].  
 [Redux][3] to my opinion take the Flux way but is more simplex: one plain object is the single application state. **Action** are plain object that incapsulate data that will update the state. The state will update only if an action wil be generated. To meke this change on state a function **reducer** thake the actions, the last state and calculate the new state.
 In Redux there is only one **Store** that bound together State, Actions, Reducer. the library inferno-redux by Provider component thake this Store to all application compoments making aesy to use it.
-###Hyperscript
+### Hyperscript
 I like **Hyperscript**, is one of the reason whay I have write thi example. I find few not trivial example to use it so I write one. I prefer it over JSX because is vanilla javascript and you haven't to compile it before use. It is nothing to learn: is very simple. It's syntax is very concise specially if use together **Hyperscript-helper**.
-###W3CSS
+### W3CSS
 A fantastic way to write respnsive html code using a small css and **no javascript**.
-###Webpack
+### Webpack
 Is an useful tool binding together several functionally you can have only if you use many building framework.
 
-##Only code?
+## Only code?
 No this is an example so I will write all necessary comment on the code. I'm new to Inferno so I think that my comment will be helpfull for beginners. I start to write comment next day and then change this rows. Now I have write 0% comments.
 
-##How to start
+## How to start
 You have to install [npm][16] then you have to go on terminal and change folder to soruce projact and do `npm install` this download and install all dependencies.
 
 `npm run start` start a server on port 8080, you can see it on your browser on url http://localhost:8080/
