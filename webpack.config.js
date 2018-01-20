@@ -2,6 +2,7 @@
  * vedi https://github.com/petehunt/webpack-howto
  *
  */
+ /* This config is obsolete and will be removed soon. It was split  in common,dev and prod config */
 var webpack = require('webpack');
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
