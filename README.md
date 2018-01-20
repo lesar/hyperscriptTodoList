@@ -5,13 +5,13 @@ What's new in this example is the tool combination used to develop it.
 
 I have found few example using this tools combination:
 
-- [TypeScript][1] a beautifull meta language
+- [TypeScript][1] a beautiful meta language
 - [Infernojs][2] a great react like framework
 - [Redux][3] a predictable state container for JavaScript apps to make more easy store and state manage on application component
 - [inferno-redux][14] an inferno library to pass context.store to each component and more
 - [Hyperscript][4] an alternative to [JSX][5] way
 - [inferno-hyperscript][15] Hyperscript syntax for Inferno templates
-- [Hyperscript helper][12] usefull way to take benefit by Hyperscript
+- [Hyperscript helper][12] useful way to take benefit by Hyperscript
 - [W3CSS][13] a modern CSS framework with built-in responsiveness
 - [Webpack][6] to put all together
 
