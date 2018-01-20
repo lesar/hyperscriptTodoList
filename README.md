@@ -34,7 +34,7 @@ A fantastic way to write responsive html code using a small css and **no javascr
 Is an useful tool binding together several functionally you can have only if you use many building framework.
 
 ## Only code?
-No this is an example so I will write all necessary comment on the code. I'm new to Inferno so I think that my comment will be helpful for beginners. I start to write comment next day and then change this rows. Now I have write 0% comments.
+No this is an example so I will write all necessary comment on the code. I'm new to Inferno so I think that my comment will be helpful for beginners. I start to write comment next day and then change this rows. Now I have write 7% comments.
 
 ## How to start
 You have to install [npm][16] then you have to go on terminal and change folder to source project and do `npm install` this download and install all dependencies.

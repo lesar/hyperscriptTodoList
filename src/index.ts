@@ -1,59 +1,49 @@
+/**
+* This is the root file for the exemple HyperscriptTodoList.
+* In this file I use a little of RamdaJs only to introduce this library:
+* I will like to write a new HyperscriptTodoList example in functional way next time
+*/
 import Inferno from 'inferno';
-//import { InfernoChildren, VNode } from "inferno/core/VNodes";
 import { createStore } from 'redux';
 import { Provider } from 'inferno-redux';
 import todoAppReducer from './todos/todo/reducers'
 import { h } from './infernoHyperscript';
-//import * as R from "ramda";
-import { partial } from "ramda";
+/**
+* I do not import all RamdaJs (import * as R from "ramda";) only partialRight
+*/
+import { partialRight } from "ramda";
 import App from './app';
 
-const myrender = (node: any, component: any) => Inferno.render(component, node);
-const render = partial(
-  myrender,
+/**
+* take Inferno.render and give to it document.getElementById('root') as last parameter
+* returning a function that need only the component param
+*/
+const render = partialRight(
+  Inferno.render,
   [ document.getElementById('root') ]
 );
+/**
+* In Redux only one store adn one state are used.
+* The store encapsulate state. Store is create taking a reducer function
+* **todoAppReducer** that take (state, action) to calculate a
+* new application state.
+* Only the reducer function can generate a new state: the state cannot
+* be manually changed.
+* store.dispach(Action) call reducer function to calculate the new state by
+* the action and the last state. The new state is encapsulate by the store.
+* Store.getState() will return the actual state.
+*/
 const store = createStore( todoAppReducer );
 /**
-  passo lo store nelle proprietà in modo che venga memorizzato nella proprietà
-  store del Provider e ritornato come proprietà di un oggetto in getChildContext
+* App is the root Application component: all other component are App childs.
+* Provider is a special component that provides to all application component
+* the store in context property: all component can access to this.context.store.
+* To do his job Provider need the store and the root component App.
+* All component instance must be create by **h** hyperscript function
 */
-//let provider = new Provider({store});
-//provider.props.children = App;//non ho trovato il modo di crearlo direttamente con il figlio
-/*
-class ProviderApp extends Provider {
-   render(): any {
-      //return new App({}).render();
-      return h(App);
-    }
-}
-*/
-/**
-  passo lo store nelle proprietà in modo che venga memorizzato nella proprietà
-  store del Provider e ritornato come proprietà di un oggetto in getChildContext.
-  children è il nodo componente radice di inferno
-  il terzo parametro è il context
-*/
-//const provider = new ProviderApp({store: store, children: App}, {});
 const provider = h(Provider, {store: store, children: h(App)});
 /**
-  compongo render x provider: provider può essere visto come una funzione che rende
-  un componente che tramite composizione viene reso a render appunto
+* provider take App place as root component.
+* render show the application.
 */
-//render(provider.render());
-//const main = R.compose(render, provider.render);
-//const main = R.pipe(provider.render, render);
-//const main = render(provider.render());
-//render(provider.render());
 render(provider);
-//Inferno.render(provider.render(), document.getElementById('root'));//main();
-/*
-function main() {
-  //return alert('ok');
-  let root = document.getElementById("root");
-  if ( root ) {
-    root.innerHTML='ok';
-  }
-}
-main();
-*/
