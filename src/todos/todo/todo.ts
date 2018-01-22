@@ -12,12 +12,15 @@ export interface ITodo {
 	enabled: boolean;
 	editMode: boolean;
 };
+export interface ISendActionTodo {
+	onTodoClick(id: number):void;
+	onTodoEditClick(id: number):void;
+	onTodoDeleteClick(id: number):void;
+	onTodoToggleEnableClick(id: number):void;
+	onSaveTodoEnter(id: number, text: string):void;
+}
 interface ITodoParams extends ITodo {
-	onTodoClick(id: number): void;
-	onTodoEditClick(id: number): void;
-	onTodoDeleteClick(id: number): void;
-	onTodoToggleEnableClick(id: number): void;
-	onSaveTodoEnter(e: Event, id: number, input1: HTMLInputElement):void;
+	send: ISendActionTodo;
 };
 
 class Todo extends Component<ITodoParams, IState> {
@@ -39,7 +42,7 @@ class Todo extends Component<ITodoParams, IState> {
 		}
 	}
 	render() {
-		const { id, title, completed, enabled, editMode, onTodoClick, onTodoDeleteClick, onTodoToggleEnableClick, onTodoEditClick, onSaveTodoEnter }: ITodoParams = this.props;
+		const { id, title, completed, enabled, editMode, send }: ITodoParams = this.props;
 		return div({
 				id,
 				className: "w3-hover-sand w3-row-padding w3-border-grey w3-border-bottom",
@@ -49,21 +52,21 @@ class Todo extends Component<ITodoParams, IState> {
 						span('.w3-text .w3-tag', {style: 'position:absolute;right:20px;bottom:38px; z-index:12;'}, 'edit'),
 						i({
 								className: "material-icons w3-text-teal w3-button",
-								onClick: () => onTodoEditClick(id)
+								onClick: () => send.onTodoEditClick(id)
 							}, "mode_edit")
 					]),
 					span(".w3-tooltip .w3-padding-16", [
 						span('.w3-text .w3-tag', {style: 'position:absolute;right:20px;bottom:38px; z-index:12;'}, 'enable/disable'),
 						i({
 								className: "material-icons w3-text-teal w3-button",
-								onClick: () => onTodoToggleEnableClick(id)
+								onClick: () => send.onTodoToggleEnableClick(id)
 							}, (enabled ? "check_box": "check_box_outline_blank"))
 					]),
 					span(".w3-tooltip", [
 						span('.w3-text .w3-tag', {style: 'position:absolute;right:0;bottom:28px; z-index:12;'}, 'delete toltip'),
 						span({
 									className: "w3-button w3-red",
-									onClick: () => onTodoDeleteClick(id)
+									onClick: () => send.onTodoDeleteClick(id)
 								}, [ "\u00D7" ])
 					]),
 				]),
@@ -76,15 +79,16 @@ class Todo extends Component<ITodoParams, IState> {
 					ref: (node: HTMLInputElement) => { this.input1 = node; },
 					onKeyPress: (event: KeyboardEvent) => {
 					  if(event.key == 'Enter'){
-							onSaveTodoEnter(event, id, this.input1);
+							event.preventDefault();
+							if (!this.input1.value.trim()) { return }
+							send.onSaveTodoEnter(id, this.input1.value);
 					  }
 					},
 					onKeyDown: (event: KeyboardEvent) => {
 						switch(event.key) {
 							case 'Escape':
 							case 'Esc':
-						    console.log(event.key);
-								onTodoEditClick(id)
+								send.onTodoEditClick(id)
 								break;
 						}
 					}
@@ -92,7 +96,7 @@ class Todo extends Component<ITodoParams, IState> {
 				div({
 					className: classNames('todo' , { completed: completed, enabled: enabled, disabled: !enabled}),
 					style: 'display: ' + (!editMode ? 'block;':'none;'),
-					onClick: () => onTodoClick(id),
+					onClick: () => send.onTodoClick(id),
 				}, [title])
 			])
 		]);
