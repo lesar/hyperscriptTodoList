@@ -1,3 +1,9 @@
+/**
+* Reducers module do the job most important in the project
+* reducers take the state, the action and calculate new state.
+* Reducers is used by the Store and Store provide to callback all
+* connected interface
+*/
 import { combineReducers } from 'redux';
 import { SAVE_EDIT_TODO, EDIT_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_VISIBILITY_FILTER, TOGGLE_ENABLE_TODO, IAddTodo, ISetVisibilityFilter, IToggleTodo } from './actions'
 import { ITodo } from './todo';
@@ -5,7 +11,7 @@ import { IFilter, filterAll } from '../../app';
 
 
 /**
- * riceve un singolo todo facente parte dello stato
+ * build a single todo
  */
 const todoAdd = (action: IAddTodo): ITodo  => {
   return {
@@ -16,6 +22,10 @@ const todoAdd = (action: IAddTodo): ITodo  => {
     editMode: false
   }
 }
+/**
+* find the todo using todo id then return a new todo but the completed property
+* is toggle
+*/
 const todoCompleteToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
   if (state.id !== action.id) {
     return state
@@ -26,6 +36,10 @@ const todoCompleteToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
     completed: !state.completed
   }
 }
+/**
+* find the todo using todo id then return a new todo but the editMode property
+* is toggle
+*/
 const todoEditToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
   if (state.id !== action.id) {
     return state
@@ -36,6 +50,10 @@ const todoEditToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
     editMode: !state.editMode
   }
 }
+/**
+* find the todo using todo id then return a new todo but the editMode property
+* is set to false and title is update by the action
+*/
 const todoSaveEditToggle = (state: ITodo, action: IAddTodo): ITodo  => {
   if (state.id !== action.id) {
     return state
@@ -47,6 +65,10 @@ const todoSaveEditToggle = (state: ITodo, action: IAddTodo): ITodo  => {
     title: action.text
   }
 }
+/**
+* find the todo using todo id then return a new todo but the enabled property
+* is toggle
+*/
 const todoEnableToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
   if (state.id !== action.id) {
     return state
@@ -57,11 +79,15 @@ const todoEnableToggle = (state: ITodo, action: IToggleTodo): ITodo  => {
     enabled: !state.enabled
   }
 }
+/**
+* Is used to filter todos to delete the action.id matching
+*/
 const todoDelete = (state: ITodo, action: IToggleTodo): boolean  => {
   return (state.id !== action.id);
 }
 /**
- * riceve un array di todo nello stato
+ * first reducer: take only his state (todos) and run action on it returning one state part
+ * all reducers must return untouched state on error and on not matching action.type
  */
 const todos = (state: ITodo[] = [], action: IAddTodo & IToggleTodo): ITodo[] => {
   switch (action.type) {
@@ -96,7 +122,8 @@ const todos = (state: ITodo[] = [], action: IAddTodo & IToggleTodo): ITodo[] => 
 }
 
 /**
- * riceve un filtro nello stato
+ * second reducer: take only his state (filter) and run action on it returning one state part
+ * all reducers must return untouched state on error and on not matching action.type
  */
 const visibilityFilter = (state: IFilter = filterAll, action: ISetVisibilityFilter): IFilter => {
   switch (action.type) {
@@ -106,7 +133,15 @@ const visibilityFilter = (state: IFilter = filterAll, action: ISetVisibilityFilt
       return state
   }
 }
-
+/**
+* used to make reducer more simple and then combining together.
+* the name of the single reducer is important: it must match on the state property
+* or you have to use an object like this 
+* {
+*   todos: MyfavoriteName1,
+*   visibilityFilter: MyfavoriteName1
+* }
+*/
 const todoAppReducer = combineReducers({
   todos,
   visibilityFilter
