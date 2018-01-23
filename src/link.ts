@@ -1,7 +1,13 @@
+/*
+* Link component set the new state filters
+*/
 import html from './infernoHyperscript';
 import { IState, IFilter, CompletedFilter, EnabledFilter } from './app';
 import Component from 'inferno-component';
 
+/*
+* provided params to Link object interface
+*/
 export interface ILinkParams {
 	filter: IFilter;
 	onClick: (filter: IFilter) => void;
@@ -11,6 +17,10 @@ export class Link extends Component<ILinkParams, IState> {
 	constructor(props: ILinkParams) {
     super(props);
 	}
+	/*
+	* return a new link using our dispatch interface onClic to dispatch new filter
+	* this leaves the enabled filter unchanged
+	*/
 	linkCompleted(filter: IFilter, value: CompletedFilter) {
 		return html.a({
 			href: "#",
@@ -25,6 +35,10 @@ export class Link extends Component<ILinkParams, IState> {
 			}
 		}, CompletedFilter[value]);
 	}
+	/*
+	* return a new link using our dispatch interface onClic to dispatch new filter
+	* this leaves the completed filter unchanged
+	*/
 	linkEnabled(filter: IFilter, value: EnabledFilter) {
 		return html.a({
 			href: "#",
