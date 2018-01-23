@@ -2,7 +2,10 @@
 * Reducers module do the job most important in the project
 * reducers take the state, the action and calculate new state.
 * Reducers is used by the Store and Store provide to callback all
-* connected interface
+* connected interface.
+* It is important notice that every reduce never change an object but instead
+* create a new one and then change his property. This is important because several
+* libraries do immutable test equality
 */
 import { combineReducers } from 'redux';
 import { SAVE_EDIT_TODO, EDIT_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_VISIBILITY_FILTER, TOGGLE_ENABLE_TODO, IAddTodo, ISetVisibilityFilter, IToggleTodo } from './actions'
@@ -136,7 +139,7 @@ const visibilityFilter = (state: IFilter = filterAll, action: ISetVisibilityFilt
 /**
 * used to make reducer more simple and then combining together.
 * the name of the single reducer is important: it must match on the state property
-* or you have to use an object like this 
+* or you have to use an object like this
 * {
 *   todos: MyfavoriteName1,
 *   visibilityFilter: MyfavoriteName1
