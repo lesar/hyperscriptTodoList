@@ -1,27 +1,27 @@
-/*
+/**
 * Is better to divide this module in two: one exporting only the action creation
 * the other exporting the interface. So you can import all action creation easy
 * using import \* ad MyName from '...'
 */
 import { IFilter } from '../../app';
-/*
+/**
 * auto inc value used for todo id
 */
 let nextTodoId: number = 0;
-/*
+/**
 * base interface actions
 */
 export interface IAction {
 	type: string;
 };
-/*
+/**
 * first action interface
 */
 export interface IAddTodo extends IAction {
 	id: number;
 	text: string;
 }
-/*
+/**
 * Action name const
 */
 export const ADD_TODO = 'ADD_TODO';

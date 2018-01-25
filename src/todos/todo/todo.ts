@@ -1,4 +1,4 @@
-/*
+/**
 * Todo is a presentational component to visualize and edit todo object
 */
 import html from '../../infernoHyperscript';
@@ -8,7 +8,7 @@ import Component from 'inferno-component';
 import { IState } from '../../app';
 import './todo.css';
 
-/*
+/**
 * Todo interface
 */
 export interface ITodo {
@@ -18,7 +18,7 @@ export interface ITodo {
 	enabled: boolean;
 	editMode: boolean;
 };
-/*
+/**
 * calback interface provided by the container component VisibleTodoList
 */
 export interface ISendActionTodo {
@@ -29,7 +29,7 @@ export interface ISendActionTodo {
 	onSaveTodoEnter(id: number, text: string):void;
 }
 
-/*
+/**
 * provided params to todo object
 */
 interface ITodoParams extends ITodo {
@@ -37,7 +37,7 @@ interface ITodoParams extends ITodo {
 };
 
 class Todo extends Component<ITodoParams, IState> {
-	/*
+	/**
 	* to handle set focus and to get value
 	*/
 	private input1: HTMLInputElement;
@@ -45,7 +45,7 @@ class Todo extends Component<ITodoParams, IState> {
 	constructor(props: ITodoParams) {
     super(props);
 	}
-	/*
+	/**
 	* an example of optimization: a target check comparing only significant property
 	* this is dangerous: it's easy to change ITodo interface and forget to update
 	* this check. If you do not update this check your interface do no repaint on
@@ -58,7 +58,7 @@ class Todo extends Component<ITodoParams, IState> {
 			lastProps.editMode == nextProps.editMode &&
 			lastProps.completed == nextProps.completed);
 	}
-	/*
+	/**
 	* on every repaint I set socus on input
 	*/
 	componentDidUpdate() {
@@ -72,7 +72,7 @@ class Todo extends Component<ITodoParams, IState> {
 				id,
 				className: "w3-hover-sand w3-row-padding w3-border-grey w3-border-bottom",
 			}, [
-				/*
+				/**
 				* this is only some html and css composing. note the i element is using
 				* [google material icons](https://fonts.googleapis.com/icon?family=Material+Icons)
 				* I use the small [W3-CSS](https://www.w3schools.com/w3css/4/w3.css) responsive css
@@ -105,15 +105,15 @@ class Todo extends Component<ITodoParams, IState> {
 					className: 'w3-input',
 					type: 'text',
 					value: title,
-					/*
+					/**
 					* edit mode control this input visibility
 					*/
 					style: 'display: ' + (editMode ? 'block;':'none;'),
-					/*
+					/**
 					* **ref** set input1 value to the html dom node to be use later
 					*/
 					ref: (node: HTMLInputElement) => { this.input1 = node; },
-					/*
+					/**
 					* enter in edit mode
 					*/
 					onKeyPress: (event: KeyboardEvent) => {
@@ -123,7 +123,7 @@ class Todo extends Component<ITodoParams, IState> {
 							send.onSaveTodoEnter(id, this.input1.value);
 					  }
 					},
-					/*
+					/**
 					* toggle edit mode
 					*/
 					onKeyDown: (event: KeyboardEvent) => {
@@ -136,7 +136,7 @@ class Todo extends Component<ITodoParams, IState> {
 					}
 				}),
 				div({
-					/*
+					/**
 					* [classNames](https://github.com/JedWatson/classnames) is a small
 					* useful library to easy control class assignment
 					*/
