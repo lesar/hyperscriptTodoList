@@ -30,6 +30,7 @@ export enum EnabledFilter {
 export interface IFilter {
 	completed: CompletedFilter;
 	enabled: EnabledFilter;
+	isSameFilter( aFilter: IFilter ): boolean;
 }
 /**
 * State interface. State is the unique global object containig the application state
@@ -38,14 +39,27 @@ export interface IState {
 	todos: ITodo[];
 	visibilityFilter: IFilter;
 }
-
+export class Filter implements IFilter {
+	completed: CompletedFilter;
+	enabled: EnabledFilter;
+	constructor(completed: CompletedFilter = CompletedFilter.All, enabled: EnabledFilter = EnabledFilter.All) {
+		this.completed = completed;
+		this.enabled = enabled;
+	}
+	isSameFilter( aFilter: IFilter ): boolean {
+		if ( typeof aFilter == void 0 ) {
+			return false;
+		}
+		if ( this === aFilter ) {
+			return true;
+		}
+		return (this.completed == aFilter.completed) && (this.enabled == aFilter.enabled);
+	}
+}
 /**
 * Initial filter object: all are showed
 */
-export var filterAll: IFilter={
-	completed: CompletedFilter.All,
-	enabled: EnabledFilter.All
-};
+export var filterAll = new Filter();
 /**
 * all component node have to be instantiated by hyperscript h function
 */

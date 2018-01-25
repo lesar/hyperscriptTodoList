@@ -2,7 +2,7 @@
 * Link component set the new state filters
 */
 import html from './infernoHyperscript';
-import { IState, IFilter, CompletedFilter, EnabledFilter } from './app';
+import { IState, IFilter, Filter, CompletedFilter, EnabledFilter } from './app';
 import Component from 'inferno-component';
 
 /**
@@ -27,10 +27,8 @@ export class Link extends Component<ILinkParams, IState> {
 			className: 'w3-bar-item w3-button',
 			onClick: (e: Event) => {
 				e.preventDefault();
-				let newFilter: IFilter = {
-					completed: value,
-					enabled: filter.enabled
-				}
+				let newFilter: IFilter = new Filter( value, filter.enabled);
+				this.props.filter = newFilter,
 				this.props.onClick(newFilter);
 			}
 		}, CompletedFilter[value]);
@@ -45,10 +43,7 @@ export class Link extends Component<ILinkParams, IState> {
 			className: 'w3-bar-item w3-button',
 			onClick: (e: Event) => {
 				e.preventDefault();
-				let newFilter: IFilter = {
-					completed: filter.completed,
-					enabled: value
-				}
+				let newFilter: IFilter = new Filter(filter.completed, value);
 				this.props.filter = newFilter,
 				this.props.onClick(newFilter);
 			}

@@ -131,6 +131,9 @@ const todos = (state: ITodo[] = [], action: IAddTodo & IToggleTodo): ITodo[] => 
 const visibilityFilter = (state: IFilter = filterAll, action: ISetVisibilityFilter): IFilter => {
   switch (action.type) {
     case SET_VISIBILITY_FILTER:
+      if ( state.isSameFilter(action.filter) ) {
+        return state;
+      }
       return action.filter
     default:
       return state

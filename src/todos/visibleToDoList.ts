@@ -1,60 +1,29 @@
 import { connect } from 'inferno-redux';
 import { saveEditTodo, editTodo, toggleTodo, deleteTodo, toggleEnableTodo } from './todo/actions';
 import TodoList from './todolist';
-import { ITodo } from './todo/todo';
 import { bindActionCreators } from 'redux';
-import { IState, IFilter, CompletedFilter, EnabledFilter } from '../app';
+import { IState } from '../app';
+import makeGetVisibleTodos from './selectors'
 
 
-/**
-* return the todos's list filtered
-*/
-const getVisibleTodos = function (todos: ITodo[], filter: IFilter): ITodo[] {
-
-	/**
-	* is better to make a new object so in the future we can make shallow
-	* comparison [see](https://reactjs.org/docs/shallow-compare.html)
-	*/
-	let newTodos = todos;
-	/**
-	* take a first filter on completed property
-	*/
-	switch (filter.completed) {
-		case CompletedFilter.Completed:
-			newTodos = newTodos.filter(t => t.completed);
-			break;
-		case CompletedFilter.Uncompleted:
-			newTodos = newTodos.filter(t => !t.completed);
-			break;
-	}
-	/**
-	* take a second filter on enabled property
-	*/
-	switch (filter.enabled) {
-		case EnabledFilter.Enabled:
-			newTodos = newTodos.filter(t => t.enabled);
-			break;
-		case EnabledFilter.Disabled:
-			newTodos = newTodos.filter(t => !t.enabled);
-			break;
-	}
-	/**
-	* return the filtered todos
-	*/
-	return newTodos;
-};
 
 /**
 * inject the filtered todos in component props.
 * Current state is provided as parameter by the store.
 * Use of component this.context.store.getState() is not necessary.
 */
-const mapStateToProps = (state: IState) => ({
-	todos: getVisibleTodos(state.todos, state.visibilityFilter)
-});
+const makeMapStateToProps = () => {
+	const getVisibleTodos = makeGetVisibleTodos();
+
+	const mapStateToProps = (state: IState) => ({
+		todos: getVisibleTodos(state)
+	});
+	return mapStateToProps;
+}
 
 
 /**
+* **This is a valid code: is commented to show a better alternative**.
 * inject the needed callback in component props. Each callback
 * is created using the proper parameter and use the provided dispach:
 * notice the call to dispach function in the arrows function.
@@ -99,7 +68,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 });
 
 const VisibleTodoList = connect(
-	mapStateToProps,
+	makeMapStateToProps,
 	mapDispatchToProps
 )(TodoList);
 export default VisibleTodoList;
