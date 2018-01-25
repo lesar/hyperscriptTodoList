@@ -24,7 +24,8 @@
     "inferno-hyperscript": "^3.10.1",
     "inferno-redux": "^3.10.1",
     "ramda": "^0.25.0",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.3",
