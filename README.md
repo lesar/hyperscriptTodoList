@@ -14,6 +14,7 @@ I have found few example using this tools combination:
 - [Hyperscript helper][12] useful way to take benefit by Hyperscript
 - [W3CSS][13] a modern CSS framework with built-in responsiveness
 - [Webpack][6] to put all together
+- [Reselect][17] optimization calculate state selection
 
 ## Why this tool set
 
@@ -32,6 +33,8 @@ I like **Hyperscript**, is one of the reason why I have write this example. I fi
 A fantastic way to write responsive html code using a small css and **no javascript**.
 ### Webpack
 Is an useful tool binding together several functionally you can have only if you use many building framework.
+### Reselect
+Is a convenient tool to avoid state selection recalculation.  Usually if you [connect][18] a component using inferno-redux. If the component needed to get any state fragment you use mapStateToProps to inject new props using state derived data. This data can be expensive to be calculate. Reselect use a one cache structure to named selector to store previous calculated data. If all parameter use in mapStateToProps to calculate new props are unchanged the value is not calculate and the cached value is get. Like many library Reselect use immutable comparison.
 
 ## Only code?
 No this is an example so I will write all necessary comment on the code. I'm new to Inferno so I think that my comment will be helpful for beginners.  
@@ -60,3 +63,5 @@ You have to install [npm][16] then you have to go on terminal and change folder 
 [14]:https://github.com/infernojs/inferno/tree/master/packages/inferno-redux
 [15]:https://github.com/terinjokes/inferno-hyperscript
 [16]:https://www.npmjs.com/
+[17]:https://github.com/reactjs/reselect
+[18]:https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
