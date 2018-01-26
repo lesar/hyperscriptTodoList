@@ -15,7 +15,7 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new TypedocWebpackPlugin({
-      out: './docs',
+      out: './dist/docs',
     	module: 'commonjs',
       mode: 'modules',
     	target: 'es6',
