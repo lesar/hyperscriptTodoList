@@ -38,40 +38,40 @@ export const makeGetVisibleTodos = () => createSelector(
   [ getTodos, getVisibilityFilter ],
   (todos: ITodo[], visibilityFilter: IFilter): ITodo[] => {
     //console.log('calcolate');
-  	/**
-  	* is better to make a new object so in the future we can make shallow
-  	* comparison [see](https://reactjs.org/docs/shallow-compare.html)
+    /**
+    * is better to make a new object so in the future we can make shallow
+    * comparison [see](https://reactjs.org/docs/shallow-compare.html)
     * A lot of library suppose this behavior
     * newTodos become a new object only when it will be filtered: see down.
     * [see also](https://redux.js.org/docs/recipes/reducers/ImmutableUpdatePatterns.html)
-  	*/
-  	let newTodos = todos;
-  	/**
-  	* take a first filter on completed property
-  	*/
-  	switch (visibilityFilter.completed) {
-  		case CompletedFilter.Completed:
-  			newTodos = newTodos.filter(t => t.completed);
-  			break;
-  		case CompletedFilter.Uncompleted:
-  			newTodos = newTodos.filter(t => !t.completed);
-  			break;
-  	}
-  	/**
-  	* take a second filter on enabled property
-  	*/
-  	switch (visibilityFilter.enabled) {
-  		case EnabledFilter.Enabled:
-  			newTodos = newTodos.filter(t => t.enabled);
-  			break;
-  		case EnabledFilter.Disabled:
-  			newTodos = newTodos.filter(t => !t.enabled);
-  			break;
-  	}
-  	/**
-  	* return the filtered todos
-  	*/
-  	return newTodos;
+    */
+    let newTodos = todos;
+    /**
+    * take a first filter on completed property
+    */
+    switch (visibilityFilter.completed) {
+      case CompletedFilter.Completed:
+        newTodos = newTodos.filter(t => t.completed);
+        break;
+      case CompletedFilter.Uncompleted:
+        newTodos = newTodos.filter(t => !t.completed);
+        break;
+    }
+    /**
+    * take a second filter on enabled property
+    */
+    switch (visibilityFilter.enabled) {
+      case EnabledFilter.Enabled:
+        newTodos = newTodos.filter(t => t.enabled);
+        break;
+      case EnabledFilter.Disabled:
+        newTodos = newTodos.filter(t => !t.enabled);
+        break;
+    }
+    /**
+    * return the filtered todos
+    */
+    return newTodos;
   }
 );
 

@@ -1,12 +1,12 @@
 div.todo.completed {
-	text-decoration: line-through;
+  text-decoration: line-through;
 }
 div.todo.enabled {
-	color:black;
+  color:black;
 }
 div.todo.disabled {
-	color:lightgrey;
+  color:lightgrey;
 }
 div.todo {
-	cursor: pointer;
+  cursor: pointer;
 }

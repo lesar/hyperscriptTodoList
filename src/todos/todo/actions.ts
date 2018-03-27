@@ -12,14 +12,14 @@ let nextTodoId: number = 0;
 * base interface actions
 */
 export interface IAction {
-	type: string;
+  type: string;
 };
 /**
 * first action interface
 */
 export interface IAddTodo extends IAction {
-	id: number;
-	text: string;
+  id: number;
+  text: string;
 }
 /**
 * Action name const
@@ -29,13 +29,13 @@ export const ADD_TODO = 'ADD_TODO';
 * first action creation object
 */
 export const addTodo = (text: string): IAddTodo => ({
-	type: ADD_TODO,
-	id: nextTodoId++,
-	text
+  type: ADD_TODO,
+  id: nextTodoId++,
+  text
 });
 
 export interface ISetVisibilityFilter extends IAction {
-	filter: IFilter;
+  filter: IFilter;
 }
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const setVisibilityFilter = (filter: IFilter): ISetVisibilityFilter => ({
@@ -44,7 +44,7 @@ export const setVisibilityFilter = (filter: IFilter): ISetVisibilityFilter => ({
 });
 
 export interface IToggleTodo extends IAction {
-	id: number;
+  id: number;
 }
 export const DELETE_TODO = 'DELETE_TODO';
 export const deleteTodo = (id: number): IToggleTodo => ({
@@ -65,7 +65,7 @@ export const SAVE_EDIT_TODO = 'SAVE_EDIT_TODO';
 export const saveEditTodo = (id: number, text: string): IAddTodo => ({
   type: SAVE_EDIT_TODO,
   id,
-	text
+  text
 });
 export const TOGGLE_ENABLE_TODO = 'TOGGLE_ENABLE_TODO';
 export const toggleEnableTodo = (id: number): IToggleTodo => ({

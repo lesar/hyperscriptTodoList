@@ -13,12 +13,12 @@ import makeGetVisibleTodos from './selectors'
 * Use of component this.context.store.getState() is not necessary.
 */
 const makeMapStateToProps = () => {
-	const getVisibleTodos = makeGetVisibleTodos();
+  const getVisibleTodos = makeGetVisibleTodos();
 
-	const mapStateToProps = (state: IState) => ({
-		todos: getVisibleTodos(state)
-	});
-	return mapStateToProps;
+  const mapStateToProps = (state: IState) => ({
+    todos: getVisibleTodos(state)
+  });
+  return mapStateToProps;
 }
 
 
@@ -32,23 +32,23 @@ const makeMapStateToProps = () => {
 */
 /*
 const mapDispatchToProps = (dispatch: any) => ({
-	send: {
-		onTodoClick: (id: number) => {
-	    dispatch(toggleTodo(id))
-	  },
-		onTodoEditClick: (id: number) => {
-	    dispatch(editTodo(id))
-	  },
-		onTodoDeleteClick: (id: number) => {
-	    dispatch(deleteTodo(id))
-	  },
-		onTodoToggleEnableClick: (id: number) => {
-	    dispatch(toggleEnableTodo(id))
-	  },
-		onSaveTodoEnter: (id: number, text: string) => {
-	    dispatch(saveEditTodo(id, text));
-	  }
-	}
+  send: {
+    onTodoClick: (id: number) => {
+      dispatch(toggleTodo(id))
+    },
+    onTodoEditClick: (id: number) => {
+      dispatch(editTodo(id))
+    },
+    onTodoDeleteClick: (id: number) => {
+      dispatch(deleteTodo(id))
+    },
+    onTodoToggleEnableClick: (id: number) => {
+      dispatch(toggleEnableTodo(id))
+    },
+    onSaveTodoEnter: (id: number, text: string) => {
+      dispatch(saveEditTodo(id, text));
+    }
+  }
 });
 */
 
@@ -58,17 +58,17 @@ const mapDispatchToProps = (dispatch: any) => ({
 * [See](https://redux.js.org/docs/api/bindActionCreators.html)
 */
 const mapDispatchToProps = (dispatch: any) => ({
-	send: bindActionCreators({
-			onTodoClick: toggleTodo,
-			onTodoEditClick: editTodo,
-			onTodoDeleteClick: deleteTodo,
-			onTodoToggleEnableClick: toggleEnableTodo,
-			onSaveTodoEnter: saveEditTodo
-	}, dispatch)
+  send: bindActionCreators({
+      onTodoClick: toggleTodo,
+      onTodoEditClick: editTodo,
+      onTodoDeleteClick: deleteTodo,
+      onTodoToggleEnableClick: toggleEnableTodo,
+      onSaveTodoEnter: saveEditTodo
+  }, dispatch)
 });
 
 const VisibleTodoList = connect(
-	makeMapStateToProps,
-	mapDispatchToProps
+  makeMapStateToProps,
+  mapDispatchToProps
 )(TodoList);
 export default VisibleTodoList;

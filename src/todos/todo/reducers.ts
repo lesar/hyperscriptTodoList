@@ -19,9 +19,9 @@ import { IFilter, filterAll } from '../../app';
 const todoAdd = (action: IAddTodo): ITodo  => {
   return {
     id: action.id,
-		title: action.text,
+    title: action.text,
     completed: false,
-		enabled: true,
+    enabled: true,
     editMode: false
   }
 }
