@@ -51,7 +51,12 @@ class Todo extends Component<ITodoParams, IState> {
 	* this check. If you do not update this check your interface do no repaint on
 	* changing status
 	*/
-	onComponentShouldUpdate(lastProps: ITodo, nextProps: ITodo):boolean {
+	shouldComponentUpdate(
+		nextProps: ITodoParams,
+		nextState: IState,
+		nextContext: any
+	):boolean {
+		let lastProps: ITodoParams = this.props;
 		return !(lastProps.id == nextProps.id &&
 			lastProps.title == nextProps.title &&
 			lastProps.enabled == nextProps.enabled &&
