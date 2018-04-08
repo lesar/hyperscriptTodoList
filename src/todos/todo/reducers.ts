@@ -10,7 +10,7 @@
 import { combineReducers } from 'redux';
 import { SAVE_EDIT_TODO, EDIT_TODO, ADD_TODO, TOGGLE_TODO, DELETE_TODO, SET_VISIBILITY_FILTER, TOGGLE_ENABLE_TODO, IAddTodo, ISetVisibilityFilter, IToggleTodo } from './actions'
 import { ITodo } from './todo';
-import { IFilter, filterAll } from '../../app';
+import { IFilter, filterAll, IState } from '../../app';
 
 
 /**
@@ -148,7 +148,7 @@ const visibilityFilter = (state: IFilter = filterAll, action: ISetVisibilityFilt
 *   visibilityFilter: MyfavoriteName1
 * }
 */
-const todoAppReducer = combineReducers({
+const todoAppReducer = combineReducers<IState>({
   todos,
   visibilityFilter
 })
