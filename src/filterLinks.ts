@@ -10,7 +10,7 @@ import { IState, IFilter } from './app';
  * properties of the component. A new property object that will be merged with
  * the properties of the component is returned. this object is often called
  * a selector and [reselect](https://github.com/reactjs/reselect)
- * is often used to integrate this data:
+ * is often used to integrate this data
  */
 const mapStateToProps = (state: IState) => ({
   filter: state.visibilityFilter
